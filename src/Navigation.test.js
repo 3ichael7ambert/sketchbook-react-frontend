@@ -1,22 +1,21 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import Navigation from './Navigation';
+// Navigation.test.js
+import { render, fireEvent } from "@testing-library/react";
+import Navigation from "./Navigation";
 
-describe('Navigation Component', () => {
-  it('renders Navigation component without crashing', () => {
-    render(<Navigation />);
-  });
+test("renders Navigation component", () => {
+  const { getByText } = render(<Navigation />);
+  const pencilButton = getByText(/Add Pencil/i);
+  expect(pencilButton).toBeInTheDocument();
+});
 
-  it('adds a pencil when "Add Pencil" button is clicked', () => {
-    const { getByText } = render(<Navigation />);
-    const addPencilButton = getByText('Add Pencil');
-    fireEvent.click(addPencilButton);
-  });
+test("toggle color picker visibility on button click", () => {
+  const { getByText, getByTestId } = render(<Navigation />);
+  const colorPickerButton = getByTestId("color-picker-button");
+  const colorPicker = getByTestId("color-picker-popover");
 
-  it('toggles drawing mode when "Toggle Drawing Mode" button is clicked', () => {
-    const { getByText } = render(<Navigation />);
-    const toggleDrawingButton = getByText('Toggle Drawing Mode');
-    fireEvent.click(toggleDrawingButton);
-  });
-
+  expect(colorPicker).toHaveStyle("display: none");
+  fireEvent.click(colorPickerButton);
+  expect(colorPicker).toHaveStyle("display: block");
+  fireEvent.click(colorPickerButton);
+  expect(colorPicker).toHaveStyle("display: none");
 });

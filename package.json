@@ -27,9 +27,18 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "deploy": "npm run build && surge ./build/ sketchbook-react.surge.sh"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    },
+    "testEnvironment": "jsdom"
   },
   "eslintConfig": {
     "extends": [

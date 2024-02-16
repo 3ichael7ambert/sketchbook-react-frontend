@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import ReactDOM from "react-dom";
 
-import { useSpring, animated } from "react-spring";
+//import { useSpring, animated } from "react-spring";
+//import { useParams } from "react-router-dom";
 
-import { useParams } from "react-router-dom";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import Navigation from "./Navigation";
 import StickyNote from "./StickyNote";
@@ -14,6 +14,7 @@ import StickyNote from "./StickyNote";
 
 import ControlPanel from "./ControlPanel";
 import { fabric } from "fabric";
+
 // import FlipPage from './FlipPage';
 
 import imgPencil from "./imgs/Pencil.png";
@@ -21,7 +22,7 @@ import imgPaperClip from "./imgs/Paperclip.png";
 import imgEraser from "./imgs/Eraser.png";
 import DrawingCanvasApi from "./Api";
 
-import { gsap, TimelineMax } from "gsap";
+//import { gsap, TimelineMax } from "gsap";
 
 // import styled from "styled-components";
 
@@ -76,14 +77,11 @@ const Sketchbook = () => {
     console.log(`Adding ${Component.name}...`);
 
     if (editor) {
-      // Create a Fabric.js object based on the React component
       const fabricObject = new fabric.Rect({
         width: 100,
         height: 100,
         fill: "red",
-        // Set any other properties as needed
       });
-
       editor.canvas.add(fabricObject);
       editor.canvas.setActiveObject(fabricObject);
       editor.canvas.renderAll();
@@ -110,9 +108,8 @@ const Sketchbook = () => {
 
       editor.canvas.on("pointermove", (event) => {
         const pressure = event.pressure || lastPressure;
-        const strokeWidth = Math.max(1, pressure * 10); // Adjust as needed
+        const strokeWidth = Math.max(1, pressure * 10);
 
-        // Your drawing logic here
         const path = new fabric.Path(event.absolutePointer, {
           strokeWidth,
           stroke: brushColor,
@@ -130,12 +127,6 @@ const Sketchbook = () => {
         editor.canvas.off("pointerup");
       });
     }
-  };
-
-  //DEAD
-  const addStickyNote = () => {
-    console.log("Adding Sticky Note...");
-    addComponent(StickyNote);
   };
 
   const addPaperclip = () => {
@@ -353,7 +344,6 @@ const Sketchbook = () => {
         editor.canvas.clear();
 
         // Load canvas from SVG data
-
         fabric.loadSVGFromString(svgData, (objects, options) => {
           console.log(
             "Load SVG Callback - objects:",
@@ -601,7 +591,7 @@ const Sketchbook = () => {
       </div>
 
       <Navigation
-        onAddStickyNote={addStickyNote}
+        // onAddStickyNote={addStickyNote}
         onAddPencil={addPencil}
         onAddPaperclip={addPaperclip}
         onAddEraser={addEraser}
@@ -622,7 +612,7 @@ const Sketchbook = () => {
       <FabricJSCanvas className="sketchbook-canvas" onReady={onReady} />
       {/* </FlipPage> */}
       <ControlPanel
-        onAddStickyNote={addStickyNote}
+        // onAddStickyNote={addStickyNote}
         onAddPencil={addPencil}
         onAddPaperclip={addPaperclip}
         onAddEraser={addEraser}
