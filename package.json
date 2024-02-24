@@ -12,6 +12,7 @@
     "fabric": "^5.3.0",
     "fabricjs-react": "^1.2.1",
     "gsap": "^3.12.5",
+    "jest-canvas-mock": "^2.5.2",
     "react": "^18.2.0",
     "react-canvas-draw": "^1.2.1",
     "react-color": "^2.19.3",
@@ -27,18 +28,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && surge ./build/ sketchbook-react.surge.sh"
   },
   "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
     "moduleNameMapper": {
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+      "src/(.*)": "<rootDir>/src/$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/src/styleMock.js",
+      "^axios$": "axios/dist/node/axios.cjs"
     },
-    "testEnvironment": "jsdom"
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -57,5 +60,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0"
   }
 }

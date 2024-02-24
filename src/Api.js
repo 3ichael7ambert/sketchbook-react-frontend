@@ -2,7 +2,6 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3005";
 
-
 class DrawingCanvasApi {
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -18,8 +17,6 @@ class DrawingCanvasApi {
       throw Array.isArray(message) ? message : [message];
     }
   }
-
-
 
   /** Save a canvas drawing. */
   static async saveCanvas(canvasData) {
@@ -40,22 +37,6 @@ class DrawingCanvasApi {
   static async getRandomCanvas() {
     return this.request("random");
   }
-
-  /** share drawing. */
-  static async saveAndShareCanvas(canvasData) {
-    try {
-      const response = await this.request("canvas", { canvasData }, "post");
-      const canvasId = response.id; // Adjust this based on your API response structure
-      console.log('Canvas saved successfully. ID:', canvasId);
-      return canvasId;
-    } catch (error) {
-      console.error('Error saving canvas:', error);
-      throw error;
-    }
-  }
-  
-
 }
-
 
 export default DrawingCanvasApi;

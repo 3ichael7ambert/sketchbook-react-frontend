@@ -1,7 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import React from 'react';
-import Sketchbook from './Sketchbook';
+import "./App.css";
+import React from "react";
+import Sketchbook from "./Sketchbook";
 
 function App() {
   return (
